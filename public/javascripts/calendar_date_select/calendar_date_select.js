@@ -217,6 +217,7 @@ CalendarDateSelect.prototype = {
     } else if (! this.options.get("buttons")) buttons_div.remove();
     
     if (this.options.get("buttons")) {
+      buttons_div.build("br");
       buttons_div.build("span", {innerHTML: "&#160;"});
       if (this.options.get("time")=="mixed" || !this.options.get("time")) b = buttons_div.build("a", {
           innerHTML: _translations["Today"],

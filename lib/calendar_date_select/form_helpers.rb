@@ -199,6 +199,7 @@ module CalendarDateSelect::FormHelpers
       else
         out << " "
         out << image_tag(image,
+            :alt => "カレンダーから入力",
             :onclick => "new CalendarDateSelect( $(this).previous(), #{options_for_javascript(javascript_options)} );",
             :style => 'border:0px; cursor:pointer;',
 			:class=>'calendar_date_select_popup_icon')
