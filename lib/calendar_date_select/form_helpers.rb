@@ -126,7 +126,7 @@ module CalendarDateSelect::FormHelpers
       use_time = false if Date===(obj.respond_to?(method) && obj.send(method))
     end
 
-    image, options, javascript_options = calendar_date_select_process_options(options)
+    image, alt, options, javascript_options = calendar_date_select_process_options(options)
 
     options[:value] ||=
       if(obj.respond_to?(method) && obj.send(method).respond_to?(:strftime))
