@@ -24,7 +24,7 @@ CalendarDateSelect.format = :japanese
 
 4. In a view file, add the following line:
 
-<%= f.calendar_date_select “date_and_time”, :time => true, :popup => :force %>
+<%= f.calendar_date_select “date_and_time”, :time => true, :popup => :force, :alt => 'カレンダーから入力' %>
 
 See a demo(http://electronicholas.com/calendar) for other usage.
 

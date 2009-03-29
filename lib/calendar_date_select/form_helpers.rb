@@ -141,7 +141,7 @@ module CalendarDateSelect::FormHelpers
 
     tag = ActionView::Helpers::InstanceTag.new_with_backwards_compatibility(object, method, self, options.delete(:object))
     calendar_date_select_output(
-      tag.to_input_field_tag( (javascript_options[:hidden] || javascript_options[:embedded]) ? "hidden" : "text", options),
+      tag.to_input_field_tag( (javascript_options[:hidden] || javascript_options[:embedded]) ? "hidden" : "text", options.reject{|k,v| k == :alt}),
       image,
       options,
       javascript_options
@@ -199,7 +199,7 @@ module CalendarDateSelect::FormHelpers
       else
         out << " "
         out << image_tag(image,
-            :alt => "カレンダーから入力",
+            :alt => options[:alt],
             :onclick => "new CalendarDateSelect( $(this).previous(), #{options_for_javascript(javascript_options)} );",
             :style => 'border:0px; cursor:pointer;',
 			:class=>'calendar_date_select_popup_icon')
