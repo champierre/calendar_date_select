@@ -143,6 +143,7 @@ module CalendarDateSelect::FormHelpers
     calendar_date_select_output(
       tag.to_input_field_tag( (javascript_options[:hidden] || javascript_options[:embedded]) ? "hidden" : "text", options.reject{|k,v| k == :alt}),
       image,
+      alt,
       options,
       javascript_options
     )
@@ -153,6 +154,7 @@ module CalendarDateSelect::FormHelpers
     def calendar_date_select_process_options(options)
       options, javascript_options = CalendarDateSelect.default_options.merge(options), {}
       image = options.delete(:image)
+      alt = options.delete(:alt)
       callbacks = [:before_show, :before_close, :after_show, :after_close, :after_navigate]
       for key in [:time, :valid_date_check, :embedded, :buttons, :clear_button, :format, :year_range, :month_year, :popup, :hidden, :minute_interval] + callbacks
         javascript_options[key] = options.delete(key) if options.has_key?(key)
@@ -186,10 +188,10 @@ module CalendarDateSelect::FormHelpers
       end
 
       javascript_options[:year_range] = format_year_range(javascript_options[:year_range] || 10)
-      [image, options, javascript_options]
+      [image, alt, options, javascript_options]
     end
 
-    def calendar_date_select_output(input, image, options = {}, javascript_options = {})
+    def calendar_date_select_output(input, image, alt, options = {}, javascript_options = {})
       out = input
       if javascript_options[:embedded]
         uniq_id = "cds_placeholder_#{(rand*100000).to_i}"
@@ -199,7 +201,7 @@ module CalendarDateSelect::FormHelpers
       else
         out << " "
         out << image_tag(image,
-            :alt => options[:alt],
+            :alt => alt,
             :onclick => "new CalendarDateSelect( $(this).previous(), #{options_for_javascript(javascript_options)} );",
             :style => 'border:0px; cursor:pointer;',
 			:class=>'calendar_date_select_popup_icon')
